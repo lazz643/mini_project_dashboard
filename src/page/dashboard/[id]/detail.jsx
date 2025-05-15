@@ -25,7 +25,7 @@ function Detail() {
   }, []);
 
   return (
-    <div className="bg-gray-100 rounded-lg px-6 py-3 mt-4 flex gap-5">
+    <div className="bg-gray-100 rounded-lg px-6 py-3 mt-4 flex flex-col sm:flex-row gap-5">
       <div className="flex-1 p-2">
         <div className="flex aspect-square w-full rounded-xl overflow-hidden ">
           <img src={data.avatar} alt="profil" className="w-full h-full object-cover" />

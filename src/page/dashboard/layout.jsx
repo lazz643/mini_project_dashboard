@@ -7,8 +7,10 @@ function Layout() {
   return (
     <div className="flex w-full min-h-screen">
       {/* partisi sidebar */}
-      <div className="flex-[1] p-2">
-        <Sidebar />
+      <div className="hidden lg:flex lg:flex-[1] lg:p-2 ">
+        <div className="bg-purple-500 h-[calc(100vh-16px)] rounded-lg fixed w-[20%] px-8 py-5 gap-4 flex flex-col">
+          <Sidebar />
+        </div>
       </div>
 
       {/* partisi nabar dan konten web */}

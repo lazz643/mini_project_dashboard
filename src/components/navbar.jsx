@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Search from "./search";
-import { MdNotifications, MdOutlineChat, MdPublic } from "react-icons/md";
+import { MdNotifications, MdOutlineChat, MdPublic, MdSearch } from "react-icons/md";
 import { useLocation, Link } from "react-router-dom";
 import { GrFormNext } from "react-icons/gr";
+import { TfiMenu } from "react-icons/tfi";
+import { IoMdClose } from "react-icons/io";
+import Sidebar from "./sidebar";
 
 const formatPathName = (str) => {
   if (!str) return "";
@@ -13,10 +16,23 @@ const formatPathName = (str) => {
 function Navbar() {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x); // hapus string kosong dari root
+  const [toggleMenu, setTogleMenu] = useState(false);
+  const [toggleSearch, setTogleSearch] = useState(true);
 
   return (
-    <div className="h-13 bg-purple-500 mt-2 rounded-2xl flex items-center px-3">
+    <div className="h-13 bg-purple-500 mt-2 rounded-2xl flex items-center px-3 relative">
+      {toggleMenu && (
+        <div className="absolute top-0 left-0 z-20 w-full h-max bg-purple-500 p-5 rounded-2xl flex flex-col gap-4  sm:hidden">
+          <button onClick={() => setTogleMenu((prev) => !prev)} className="text-white text-[32px]">
+            <IoMdClose />
+          </button>
+          <Sidebar />
+        </div>
+      )}
       <div className="w-full flex justify-between items-center text-white">
+        <button onClick={() => setTogleMenu((prev) => !prev)} className="sm:hidden">
+          <TfiMenu />
+        </button>
         <div className="flex gap-2">
           <Link to="/dashboard" className="hover:underline font-semibold">
             Dashboard
@@ -40,8 +56,18 @@ function Navbar() {
             );
           })}
         </div>
-        <div className="flex gap-3 items-center">
-          <Search />
+        <div className="flex gap-3 items-center ">
+          <button onClick={() => setTogleSearch((prev) => !prev)} className="sm:hidden">
+            <MdSearch />
+          </button>
+          <div className="hidden sm:flex">
+            <Search />
+          </div>
+          {toggleSearch && (
+            <div className="p-2 bg-purple-500 rounded-2xl absolute z-30 right-0 top-16 sm:hidden">
+              <Search />
+            </div>
+          )}
           <MdNotifications />
           <MdOutlineChat />
           <MdPublic />

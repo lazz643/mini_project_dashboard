@@ -62,44 +62,42 @@ function Sidebar() {
   };
 
   return (
-    <div>
-      <div className="bg-purple-500 h-[calc(100vh-16px)] rounded-lg fixed w-[20%] px-8 py-5 gap-4 flex flex-col">
-        <div className="flex flex-row gap-3">
-          <div className="w-12 aspect-square rounded-full overflow-hidden bg-gray-200">
-            <img
-              src="https://static.vecteezy.com/system/resources/previews/030/504/837/non_2x/avatar-account-flat-isolated-on-transparent-background-for-graphic-and-web-design-default-social-media-profile-photo-symbol-profile-and-people-silhouette-user-icon-vector.jpg"
-              alt="profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="text-white flex flex-col justify-center">
-            <p className="text-[14px] font-bold">Jhon Doe</p>
-            <p className="text-[12px]">Admin</p>
-          </div>
+    <>
+      <div className="flex flex-row gap-3">
+        <div className="w-12 aspect-square rounded-full overflow-hidden bg-gray-200">
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/030/504/837/non_2x/avatar-account-flat-isolated-on-transparent-background-for-graphic-and-web-design-default-social-media-profile-photo-symbol-profile-and-people-silhouette-user-icon-vector.jpg"
+            alt="profile"
+            className="w-full h-full object-cover"
+          />
         </div>
-        <ul className="flex flex-col gap-2">
-          {menuItems.map((menu) => (
-            <li key={menu.title} className="flex flex-col gap-1">
-              <p className="text-white font-bold">{menu.title}</p>
-              <div className="flex flex-col gap-2">
-                {menu.list.map((item) => (
-                  <button key={item.title} className={`hover:bg-purple-400 p-3 rounded-xl text-white flex items-center gap-1 cursor-pointer ${location.pathname === item.path ? "bg-purple-400" : ""}`}>
-                    {item.icon}
-                    <p>{item.title}</p>
-                  </button>
-                ))}
-              </div>
-            </li>
-          ))}
-        </ul>
-        <div className="flex flex-[1] items-end">
-          <button onClick={handleLogout} className="bg-red-500 hover:bg-red-400 p-3 rounded-xl text-white flex items-center gap-1 cursor-pointer">
-            <RiLogoutBoxFill />
-            <p>Logout</p>
-          </button>
+        <div className="text-white flex flex-col justify-center">
+          <p className="text-[14px] font-bold">Jhon Doe</p>
+          <p className="text-[12px]">Admin</p>
         </div>
       </div>
-    </div>
+      <ul className="flex flex-col gap-2">
+        {menuItems.map((menu) => (
+          <li key={menu.title} className="flex flex-col gap-1">
+            <p className="text-white font-bold">{menu.title}</p>
+            <div className="flex flex-col gap-2">
+              {menu.list.map((item) => (
+                <button key={item.title} className={`hover:bg-purple-400 p-3 rounded-xl text-white flex items-center gap-1 cursor-pointer ${location.pathname.startsWith(item.path) ? "bg-purple-400" : ""}`}>
+                  {item.icon}
+                  <p>{item.title}</p>
+                </button>
+              ))}
+            </div>
+          </li>
+        ))}
+      </ul>
+      <div className="flex flex-[1] items-end">
+        <button onClick={handleLogout} className="bg-red-500 hover:bg-red-400 p-3 rounded-xl text-white flex items-center gap-1 cursor-pointer">
+          <RiLogoutBoxFill />
+          <p>Logout</p>
+        </button>
+      </div>
+    </>
   );
 }
 
