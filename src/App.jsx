@@ -9,6 +9,7 @@ import ProtectedRoute from "./components/protectedRoute";
 import Detail from "./page/dashboard/[id]/detail";
 import Layout from "./page/dashboard/layout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { SearchProvider } from "./searchContext/SearchContext";
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Layout />
+                <SearchProvider>
+                  <Layout />
+                </SearchProvider>
               </ProtectedRoute>
             }
           >

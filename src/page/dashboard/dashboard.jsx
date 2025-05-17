@@ -1,6 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useContext, useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { SearchContext } from "../../searchContext/SearchContext";
 
 function Dashboard() {
   const token = localStorage.getItem("token");
@@ -8,6 +9,8 @@ function Dashboard() {
   const [page, setPage] = useState(1);
   const [maxPage, setMax] = useState(0);
   const navigate = useNavigate();
+  const [filteredUser, setFilteredUser] = useState([]);
+  const { searchQuery } = useContext(SearchContext);
 
   useEffect(() => {
     // get data user
@@ -30,6 +33,11 @@ function Dashboard() {
     getDataUser();
   }, [page]);
 
+  useEffect(() => {
+    const filtered = dataUser.filter((user) => `${user.first_name} ${user.last_name}`.toLowerCase().includes(searchQuery.toLowerCase()));
+    setFilteredUser(filtered);
+  }, [searchQuery, dataUser]);
+
   return (
     <div className="bg-gray-100 rounded-lg px-6 py-3 mt-4 flex flex-col gap-5">
       <div className="flex justify-between">
@@ -38,7 +46,7 @@ function Dashboard() {
       </div>
       <ul className="flex flex-wrap gap-6 w-full">
         {/* Card user list */}
-        {dataUser.map((data) => (
+        {filteredUser.map((data) => (
           <li key={data.id} className="bg-white w-[220px] h-[256px] rounded-xl shadow-lg flex flex-col overflow-hidden hover:scale-105 transition-all">
             <div className="h-[55%]">
               <img src={data.avatar} alt="imgUser" className="w-full h-full object-cover" />

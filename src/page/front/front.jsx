@@ -16,8 +16,8 @@ function Front() {
       </div>
       <div className="w-full h-screen absolute z-10 top-0 left-0 flex">
         <div className="hidden lg:flex-1 lg:flex"></div>
-        <div className="w-full h-screen flex-1 flex flex-row items-center justify-center">
-          <div className="w-full shadow-xl h-full bg-white flex flex-col gap-5 p-5 justify-center sm:w-[500px] sm:h-[calc(100vh-200px)] sm: rounded-xl">
+        <div className="w-full h-screen flex-1 flex flex-row items-center justify-center lg:justify-end lg:px-20">
+          <div className="w-full shadow-xl h-full bg-gray-100 flex flex-col gap-5 p-5 justify-center sm:w-[400px] sm:h-[calc(100vh-200px)] sm: rounded-xl">
             <div className="w-full flex justify-between mb-10">
               <button onClick={() => setMenu("login")} className={`w-[45%] py-1 border-2  rounded-2xl  cursor-pointer ${menu === "login" ? "border-gray-300 text-gray-300" : "border-purple-500 text-purple-500"}`}>
                 Login
